@@ -1,3 +1,8 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "ilkka.google-java-format",
+  "[java]": {
+    "editor.defaultFormatter": "ilkka.google-java-format"
+  }
 }

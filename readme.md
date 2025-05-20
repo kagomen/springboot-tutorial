@@ -11,9 +11,24 @@
 - .gradle/
   - Gradle のビルドキャッシュ
 
+## コマンド
+
+- 開発用サーバ立ち上げ
+
 ```bash
 ./gradlew bootRun
+```
 
+- ビルド&動作確認
+
+```bash
 ./gradlew bootJar
 java -jar build/libs/springboot-tutorial-0.0.1.jar
 ```
+
+- フォーマッター
+
+```bash
+./gradlew spotlessApply
+```
+

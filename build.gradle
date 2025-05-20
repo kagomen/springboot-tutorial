@@ -1,6 +1,7 @@
 plugins {
     id 'java' // Javaプロジェクトとしてビルドするための基本的なプラグイン
     id 'org.springframework.boot' version '3.4.5' // bootRunやbootJarが使えるようになる
+    id 'com.diffplug.spotless' version '6.25.0' // フォーマッター
 }
 
 // バージョンを書かずに依存関係を追加できるようにする
@@ -19,4 +20,12 @@ repositories {
 // 依存関係
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+// Spotless（フォーマッター）の設定
+spotless {
+    java {
+        googleJavaFormat()
+        target 'src/**/*.java'
+    }
 }
