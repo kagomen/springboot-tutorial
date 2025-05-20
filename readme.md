@@ -13,6 +13,12 @@
 
 ## コマンド
 
+- `build.gradle`の`mainClass`に指定したファイルの実行
+
+```bash
+./gradlew run
+```
+
 - 開発用サーバ立ち上げ
 
 ```bash
