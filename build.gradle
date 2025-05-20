@@ -1,0 +1,22 @@
+plugins {
+    id 'java' // Javaプロジェクトとしてビルドするための基本的なプラグイン
+    id 'org.springframework.boot' version '3.4.5' // bootRunやbootJarが使えるようになる
+}
+
+// バージョンを書かずに依存関係を追加できるようにする
+apply plugin: 'io.spring.dependency-management'
+
+// プロジェクトのメタ情報
+group = 'com.example'
+version = '0.0.1'
+sourceCompatibility = '21' //Javaのバージョン
+
+// どのリポジトリから依存を取得するかを指定
+repositories {
+    mavenCentral()
+}
+
+// 依存関係
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
