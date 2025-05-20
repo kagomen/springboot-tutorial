@@ -1,8 +1,8 @@
-package com.example.demo;
+package com.example.mvc;
 
-import com.example.demo.controller.MessageController;
-import com.example.demo.model.MessageModel;
-import com.example.demo.view.MessageView;
+import com.example.mvc.controller.MessageController;
+import com.example.mvc.model.MessageModel;
+import com.example.mvc.view.MessageView;
 
 public class Main {
   public static void main(String[] args) {

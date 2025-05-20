@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.example.mvc.controller;
 
-import com.example.demo.model.MessageModel;
-import com.example.demo.view.MessageView;
+import com.example.mvc.model.MessageModel;
+import com.example.mvc.view.MessageView;
 
 public class MessageController {
   private final MessageModel model;

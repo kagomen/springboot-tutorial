@@ -1,4 +1,4 @@
-package com.example.demo.view;
+package com.example.mvc.view;
 
 public class MessageView {
   // jsonやhtml、pdfを返すといった変更はViewの担当領域
