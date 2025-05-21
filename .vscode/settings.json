@@ -5,5 +5,14 @@
   "google-java-format.executable-path": "/opt/homebrew/bin/google-java-format",
   "[java]": {
     "editor.defaultFormatter": "ilkka.google-java-format"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

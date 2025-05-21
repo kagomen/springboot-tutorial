@@ -5,6 +5,8 @@ public class User {
   private String email;
   private int age;
 
+  public User() {}
+
   public User(String name, String email, int age) {
     this.name = name;
     this.email = email;
@@ -21,5 +23,17 @@ public class User {
 
   public int getAge() {
     return age;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
   }
 }

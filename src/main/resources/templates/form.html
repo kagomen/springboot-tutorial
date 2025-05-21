@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <h1>ユーザー情報入力</h1>
+    <form th:action="@{/form}" th:object="${user}" method="post">
+      <p>Name: <input type="text" th:field="*{name}" /></p>
+      <p>Age: <input type="number" th:field="*{age}" /></p>
+      <p>Email: <input type="email" th:field="*{email}" /></p>
+      <button type="submit">submit</button>
+    </form>
+  </body>
+</html>

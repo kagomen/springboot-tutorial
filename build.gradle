@@ -33,6 +33,6 @@ spotless {
 }
 
 // 実行クラスのsrc/main/java/以降のパスを指定
-application {
-    mainClass = 'com.example.demo.Main'
-}
+// application {
+//     mainClass = 'com.example.demo.Main'
+// }
