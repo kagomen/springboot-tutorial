@@ -1,6 +1,6 @@
 plugins {
     id 'java' // Javaプロジェクトとしてビルドするための基本的なプラグイン
-    id 'application' // ./gradlew runが使えるようになる
+    // id 'application' // ./gradlew runが使えるようになる
     id 'org.springframework.boot' version '3.4.5' // ./gradlew bootRunが使えるようになる
     id 'com.diffplug.spotless' version '6.25.0' // フォーマッター
 }
@@ -21,6 +21,7 @@ repositories {
 // 依存関係
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 // Spotless（フォーマッター）の設定
