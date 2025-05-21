@@ -1,8 +1,20 @@
 package com.example.springmvc.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class User {
+
+  @NotBlank(message = "名前は必須項目です")
   private String name;
+
+  @Email(message = "正しい形式で入力してください")
   private String email;
+
+  @Min(value = 0, message = "年齢は0以上で入力してください")
+  @Max(value = 150, message = "年齢は150以下で入力してください")
   private int age;
 
   public User() {}

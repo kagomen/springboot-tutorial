@@ -8,9 +8,18 @@
   <body>
     <h1>ユーザー情報入力</h1>
     <form th:action="@{/form}" th:object="${user}" method="post">
-      <p>Name: <input type="text" th:field="*{name}" /></p>
-      <p>Age: <input type="number" th:field="*{age}" /></p>
-      <p>Email: <input type="email" th:field="*{email}" /></p>
+      <p>
+        Name: <input type="text" th:field="*{name}" />
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+      </p>
+      <p>
+        Age: <input type="number" th:field="*{age}" />
+        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+      </p>
+      <p>
+        Email: <input type="email" th:field="*{email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+      </p>
       <button type="submit">submit</button>
     </form>
   </body>
