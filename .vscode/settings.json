@@ -1,0 +1,9 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "ilkka.google-java-format",
+  "google-java-format.executable-path": "/opt/homebrew/bin/google-java-format",
+  "[java]": {
+    "editor.defaultFormatter": "ilkka.google-java-format"
+  }
+}

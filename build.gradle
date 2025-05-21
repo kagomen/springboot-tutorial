@@ -1,0 +1,38 @@
+plugins {
+    id 'java' // Javaプロジェクトとしてビルドするための基本的なプラグイン
+    // id 'application' // ./gradlew runが使えるようになる
+    id 'org.springframework.boot' version '3.4.5' // ./gradlew bootRunが使えるようになる
+    id 'com.diffplug.spotless' version '6.25.0' // フォーマッター
+}
+
+// バージョンを書かずに依存関係を追加できるようにする
+apply plugin: 'io.spring.dependency-management'
+
+// プロジェクトのメタ情報
+group = 'com.example'
+version = '0.0.1'
+sourceCompatibility = '21' //Javaのバージョン
+
+// どのリポジトリから依存を取得するかを指定
+repositories {
+    mavenCentral()
+}
+
+// 依存関係
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+
+// Spotless（フォーマッター）の設定
+spotless {
+    java {
+        googleJavaFormat()
+        target 'src/**/*.java'
+    }
+}
+
+// 実行クラスのsrc/main/java/以降のパスを指定
+application {
+    mainClass = 'com.example.demo.Main'
+}
