@@ -9,5 +9,9 @@
     <p th:text="${user.name}"></p>
     <p th:text="${user.age}"></p>
     <p th:text="${user.email}"></p>
+    <p th:text="${user.gender}"></p>
+    <p>
+      <span th:each="interest : ${user.interests}" th:text="${interest}"></span>
+    </p>
   </body>
 </html>

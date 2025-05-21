@@ -4,18 +4,21 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 
 public class User {
 
-  @NotBlank(message = "名前は必須項目です")
-  private String name;
+  @NotBlank private String name;
 
-  @Email(message = "正しい形式で入力してください")
-  private String email;
+  @Email private String email;
 
-  @Min(value = 0, message = "年齢は0以上で入力してください")
-  @Max(value = 150, message = "年齢は150以下で入力してください")
+  @Min(0)
+  @Max(150)
   private int age;
+
+  @NotBlank private String gender;
+
+  private List<String> interests;
 
   public User() {}
 
@@ -37,6 +40,14 @@ public class User {
     return age;
   }
 
+  public String getGender() {
+    return gender;
+  }
+
+  public List<String> getInterests() {
+    return interests;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -47,5 +58,13 @@ public class User {
 
   public void setAge(int age) {
     this.age = age;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public void setInterests(List<String> interests) {
+    this.interests = interests;
   }
 }

@@ -2,6 +2,7 @@ package com.example.springmvc.controller;
 
 import com.example.springmvc.model.User;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +19,20 @@ public class FormController {
   }
 
   @PostMapping("form")
-  public String submitForm(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+  public String submitForm(@Valid @ModelAttribute User user, BindingResult result) {
     if (result.hasErrors()) {
       return "form";
     }
-    model.addAttribute("user", user);
     return "result";
+  }
+
+  @ModelAttribute("genderOptions")
+  public List<String> genderOptions() {
+    return List.of("male", "female", "other");
+  }
+
+  @ModelAttribute("interestOptions")
+  public List<String> interestOptions() {
+    return List.of("programming", "music", "soccer", "tennis");
   }
 }

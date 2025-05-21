@@ -20,6 +20,28 @@
         Email: <input type="email" th:field="*{email}" />
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
       </p>
+      <p>
+        Gender:
+        <span th:each="genderOption : ${genderOptions}">
+          <input type="radio" th:field="*{gender}" th:value="${genderOption}" />
+          <label th:text="${genderOption}"></label>
+        </span>
+        <span
+          th:if="${#fields.hasErrors('gender')}"
+          th:errors="*{gender}"
+        ></span>
+      </p>
+      <p>
+        Interested in:
+        <span th:each="interestOption : ${interestOptions}">
+          <input
+            type="checkbox"
+            th:field="*{interests}"
+            th:value="${interestOption}"
+          />
+          <label th:text="${interestOption}"></label>
+        </span>
+      </p>
       <button type="submit">submit</button>
     </form>
   </body>
