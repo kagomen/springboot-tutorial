@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor // 引数なしコンストラクタを生成
+@NoArgsConstructor
 public class User {
 
   @NotBlank private String name;

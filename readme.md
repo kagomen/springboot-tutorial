@@ -38,3 +38,17 @@ java -jar build/libs/springboot-tutorial-0.0.1.jar
 ./gradlew spotlessApply
 ```
 
+## OpenAPI セットアップ
+
+- 依存の追加
+
+```bash
+# build.gradle
+
+dependencies {
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+}
+```
+
+- `./gradlew bootRun`でサーバー起動
+- http://localhost:8080/swagger-ui.html にアクセス
