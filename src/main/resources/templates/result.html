@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result</title>
+  </head>
+  <body>
+    <p th:text="${user.name}"></p>
+    <p th:text="${user.age}"></p>
+    <p th:text="${user.email}"></p>
+    <p th:text="${user.gender}"></p>
+    <p>
+      <span th:each="interest : ${user.interests}" th:text="${interest}"></span>
+    </p>
+  </body>
+</html>

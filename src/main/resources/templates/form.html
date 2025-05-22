@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <h1>ユーザー情報入力</h1>
+    <form th:action="@{/form}" th:object="${user}" method="post">
+      <p>
+        Name: <input type="text" th:field="*{name}" />
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+      </p>
+      <p>
+        Age: <input type="number" th:field="*{age}" />
+        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+      </p>
+      <p>
+        Email: <input type="email" th:field="*{email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+      </p>
+      <p>
+        Gender:
+        <span th:each="genderOption : ${genderOptions}">
+          <input type="radio" th:field="*{gender}" th:value="${genderOption}" />
+          <label th:text="${genderOption}"></label>
+        </span>
+        <span
+          th:if="${#fields.hasErrors('gender')}"
+          th:errors="*{gender}"
+        ></span>
+      </p>
+      <p>
+        Interested in:
+        <span th:each="interestOption : ${interestOptions}">
+          <input
+            type="checkbox"
+            th:field="*{interests}"
+            th:value="${interestOption}"
+          />
+          <label th:text="${interestOption}"></label>
+        </span>
+      </p>
+      <button type="submit">submit</button>
+    </form>
+  </body>
+</html>
