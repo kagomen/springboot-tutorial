@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Entity // このクラスはDBテーブルとして管理される、という宣言
-public class Todo {
+public class TaskItem {
 
   @Schema(accessMode = Schema.AccessMode.READ_ONLY) // データとしてidを持つが、POST時に指定できないようにする
   @Id // 主キー
