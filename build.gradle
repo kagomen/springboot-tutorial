@@ -39,6 +39,11 @@ dependencies {
 
     // H2（開発用DB）
     runtimeOnly 'com.h2database:h2'
+
+    // MapStruct
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0' // Lombokと一緒に使うために必要
 }
 
 // Spotless（フォーマッター）の設定
