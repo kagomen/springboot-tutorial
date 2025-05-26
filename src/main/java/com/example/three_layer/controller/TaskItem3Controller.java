@@ -3,6 +3,7 @@ package com.example.three_layer.controller;
 import com.example.three_layer.dto.TaskItem3Request;
 import com.example.three_layer.dto.TaskItem3Response;
 import com.example.three_layer.entity.TaskItem3;
+import com.example.three_layer.mapper.TaskItem3Mapper;
 import com.example.three_layer.service.TaskItem3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,46 +25,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskItem3Controller {
 
   private final TaskItem3Service service;
+  private final TaskItem3Mapper mapper;
 
   @Autowired
-  public TaskItem3Controller(TaskItem3Service service) {
+  public TaskItem3Controller(TaskItem3Service service, TaskItem3Mapper mapper) {
     this.service = service;
+    this.mapper = mapper;
   }
 
   @Operation(summary = "タスク一覧取得")
   @GetMapping
   public List<TaskItem3Response> getAll() {
     List<TaskItem3> taskItems = service.findAll();
-    return taskItems.stream().map(taskItem -> this.toDTO(taskItem)).collect(Collectors.toList());
+    return taskItems.stream().map(mapper::toDTO).collect(Collectors.toList());
   }
 
   @Operation(summary = "タスク追加")
   @PostMapping
   public TaskItem3Response addTaskItem(@RequestBody TaskItem3Request req) {
-    var taskItem = toEntity(req);
-    return toDTO(service.save(taskItem));
+    var taskItem = mapper.toEntity(req);
+    return mapper.toDTO(service.save(taskItem));
   }
 
   @Operation(summary = "タスク削除")
   @DeleteMapping("/{id}")
   public void deleteTaskItem(@PathVariable Integer id) { // @PathVariable: URLに含まれる変数を引数として受け取る
     service.deleteById(id);
-  }
-
-  // DTOからEntityに変換(対DB用)
-  private TaskItem3 toEntity(TaskItem3Request req) {
-    var entity = new TaskItem3();
-    entity.setTitle(req.getTitle());
-    entity.setDone(req.isDone());
-    return entity;
-  }
-
-  // EntityからDTOに変換（対クライアント用）
-  private TaskItem3Response toDTO(TaskItem3 entity) {
-    var dto = new TaskItem3Response();
-    dto.setId(entity.getId());
-    dto.setTitle(entity.getTitle());
-    dto.setDone(entity.isDone());
-    return dto;
   }
 }
