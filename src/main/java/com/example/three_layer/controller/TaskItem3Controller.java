@@ -1,11 +1,11 @@
 package com.example.three_layer.controller;
 
 import com.example.three_layer.common.ApiResponse;
+import com.example.three_layer.common.Meta;
 import com.example.three_layer.dto.TaskItem3PatchRequest;
 import com.example.three_layer.dto.TaskItem3Request;
 import com.example.three_layer.dto.TaskItem3Response;
 import com.example.three_layer.dto.TaskItem3UpdateRequest;
-import com.example.three_layer.entity.TaskItem3;
 import com.example.three_layer.mapper.TaskItem3Mapper;
 import com.example.three_layer.service.TaskItem3Service;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -38,12 +40,13 @@ public class TaskItem3Controller {
     this.mapper = mapper;
   }
 
-  @Operation(summary = "タスク一覧取得")
+  @Operation(summary = "ページ付きのタスク一覧取得", description = "ソート条件を ['title,asc'] のように指定しないとうまく実行できない")
   @GetMapping
-  public ApiResponse<List<TaskItem3Response>> getAll() {
-    List<TaskItem3> taskItems = service.findAll();
-    var result = taskItems.stream().map(mapper::toDTO).toList();
-    return ApiResponse.ok(result);
+  public ApiResponse<List<TaskItem3Response>> getAll(
+      @PageableDefault(size = 10) Pageable pageable) {
+    var page = service.findAll(pageable);
+    var data = page.getContent().stream().map(mapper::toDTO).toList();
+    return ApiResponse.ok(data, Meta.fromPage(page));
   }
 
   @Operation(summary = "タスク追加")

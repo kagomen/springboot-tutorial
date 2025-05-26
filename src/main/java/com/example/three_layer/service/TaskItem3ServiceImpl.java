@@ -9,6 +9,8 @@ import com.example.three_layer.mapper.TaskItem3Mapper;
 import com.example.three_layer.repository.TaskItem3Repository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service // Service層の実装クラスであること・DIの対象であることをSpringに伝える
@@ -26,6 +28,11 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
   @Override
   public List<TaskItem3> findAll() {
     return repository.findAll();
+  }
+
+  @Override
+  public Page<TaskItem3> findAll(Pageable pageable) {
+    return repository.findAll(pageable);
   }
 
   @Override

@@ -8,8 +8,13 @@ import lombok.Data;
 public class ApiResponse<T> {
   private boolean success;
   private T data;
+  private Meta meta;
 
   public static <T> ApiResponse<T> ok(T data) {
-    return new ApiResponse<>(true, data);
+    return new ApiResponse<>(true, data, Meta.now());
+  }
+
+  public static <T> ApiResponse<T> ok(T data, Meta meta) {
+    return new ApiResponse<>(true, data, meta);
   }
 }
