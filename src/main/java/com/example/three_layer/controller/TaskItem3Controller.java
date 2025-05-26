@@ -2,6 +2,7 @@ package com.example.three_layer.controller;
 
 import com.example.three_layer.dto.TaskItem3Request;
 import com.example.three_layer.dto.TaskItem3Response;
+import com.example.three_layer.dto.TaskItem3UpdateRequest;
 import com.example.three_layer.entity.TaskItem3;
 import com.example.three_layer.mapper.TaskItem3Mapper;
 import com.example.three_layer.service.TaskItem3Service;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +48,15 @@ public class TaskItem3Controller {
   public TaskItem3Response addTaskItem(@RequestBody @Valid TaskItem3Request req) {
     var taskItem = mapper.toEntity(req);
     return mapper.toDTO(service.save(taskItem));
+  }
+
+  @Operation(summary = "タスク更新")
+  @PutMapping("/{id}")
+  public TaskItem3Response updateTaskItem(
+      @PathVariable Integer id, @RequestBody @Valid TaskItem3UpdateRequest req) {
+    var taskItem = mapper.toEntity(id, req);
+    var result = service.update(id, taskItem);
+    return mapper.toDTO(result);
   }
 
   @Operation(summary = "タスク削除")

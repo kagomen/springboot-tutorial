@@ -1,6 +1,7 @@
 package com.example.three_layer.service;
 
 import com.example.three_layer.entity.TaskItem3;
+import com.example.three_layer.exception.TaskItem3NotFoundException;
 import com.example.three_layer.repository.TaskItem3Repository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,17 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
 
   @Override
   public TaskItem3 save(TaskItem3 taskItem) {
+    return repository.save(taskItem);
+  }
+
+  @Override
+  public TaskItem3 update(Integer id, TaskItem3 updateTaskItem) {
+    TaskItem3 taskItem =
+        repository.findById(id).orElseThrow(() -> new TaskItem3NotFoundException());
+
+    taskItem.setTitle(updateTaskItem.getTitle());
+    taskItem.setDone(updateTaskItem.isDone());
+
     return repository.save(taskItem);
   }
 

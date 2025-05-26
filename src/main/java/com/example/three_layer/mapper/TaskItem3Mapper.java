@@ -2,6 +2,7 @@ package com.example.three_layer.mapper;
 
 import com.example.three_layer.dto.TaskItem3Request;
 import com.example.three_layer.dto.TaskItem3Response;
+import com.example.three_layer.dto.TaskItem3UpdateRequest;
 import com.example.three_layer.entity.TaskItem3;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,15 @@ public class TaskItem3Mapper {
   // DTOからEntityに変換(対DB用)
   public TaskItem3 toEntity(TaskItem3Request req) {
     var entity = new TaskItem3();
+    entity.setTitle(req.getTitle());
+    entity.setDone(req.isDone());
+    return entity;
+  }
+
+  // DTOからEntityに変換(対DB用)
+  public TaskItem3 toEntity(Integer id, TaskItem3UpdateRequest req) {
+    var entity = new TaskItem3();
+    entity.setId(id);
     entity.setTitle(req.getTitle());
     entity.setDone(req.isDone());
     return entity;

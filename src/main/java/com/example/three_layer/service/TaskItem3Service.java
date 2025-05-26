@@ -8,5 +8,7 @@ public interface TaskItem3Service {
 
   TaskItem3 save(TaskItem3 taskItem);
 
+  TaskItem3 update(Integer id, TaskItem3 updateTaskItem);
+
   void deleteById(Integer id);
 }
