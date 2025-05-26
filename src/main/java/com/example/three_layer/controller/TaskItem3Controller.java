@@ -7,6 +7,7 @@ import com.example.three_layer.mapper.TaskItem3Mapper;
 import com.example.three_layer.service.TaskItem3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class TaskItem3Controller {
 
   @Operation(summary = "タスク追加")
   @PostMapping
-  public TaskItem3Response addTaskItem(@RequestBody TaskItem3Request req) {
+  public TaskItem3Response addTaskItem(@RequestBody @Valid TaskItem3Request req) {
     var taskItem = mapper.toEntity(req);
     return mapper.toDTO(service.save(taskItem));
   }
