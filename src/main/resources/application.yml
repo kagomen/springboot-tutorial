@@ -21,3 +21,7 @@ spring:
     user:
       name: user
       password: pass
+
+  # プロファイル分離
+  profiles:
+    active: dev
