@@ -38,6 +38,12 @@ java -jar build/libs/springboot-tutorial-0.0.1.jar
 ./gradlew spotlessApply
 ```
 
+- 本番環境
+
+```bash
+./gradlew bootRun --args='--spring.profiles.active=prod'
+```
+
 ## OpenAPI セットアップ
 
 - 依存の追加
