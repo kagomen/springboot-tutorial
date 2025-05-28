@@ -8,6 +8,7 @@ import com.example.three_layer.exception.TaskItem3NotFoundException;
 import com.example.three_layer.mapper.TaskItem3Mapper;
 import com.example.three_layer.repository.TaskItem3Repository;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,7 +57,7 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
     TaskItem3 taskItem =
         repository.findById(id).orElseThrow(() -> new TaskItem3NotFoundException());
 
-    if (req.getTitle() != null) {
+    if (!StringUtils.isEmpty(req.getTitle())) { // 空文字またはnullの場合は変更しない
       taskItem.setTitle(req.getTitle());
     }
     if (req.getDone() != null) {
