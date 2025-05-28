@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class ApiErrorResponse {
-  private final boolean success = false;
+  private final boolean isSuccess = false;
   private final String error;
   private final Map<String, String> errors;
 

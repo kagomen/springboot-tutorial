@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ApiResponse<T> {
-  private boolean success;
+  private boolean isSuccess;
   private T data;
   private Meta meta;
 
