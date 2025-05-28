@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskItemController {
 
   private final Map<Integer, TaskItem> taskItems = new HashMap<>();
-  private int nextId = 1;
+  private int currentId = 1;
 
   @Operation(summary = "タスク一覧取得")
   @GetMapping
@@ -31,8 +31,9 @@ public class TaskItemController {
   @Operation(summary = "タスク追加")
   @PostMapping
   public TaskItem addTaskItem(@RequestBody TaskItem taskItem) { // JSONが自動でパースされ、オブジェクトとして受け取る
-    taskItem.setId(nextId++);
-    taskItems.put(taskItem.getId(), taskItem);
+    int id = currentId++;
+    taskItem.setId(id);
+    taskItems.put(id, taskItem);
     return taskItem;
   }
 
