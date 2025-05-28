@@ -57,7 +57,7 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
     TaskItem3 taskItem =
         repository.findById(id).orElseThrow(() -> new TaskItem3NotFoundException());
 
-    if (!StringUtils.isEmpty(req.getTitle())) { // 空文字またはnullの場合は変更しない
+    if (!StringUtils.isBlank(req.getTitle())) { // 空文字、半角スペース、nullのときは変更しない
       taskItem.setTitle(req.getTitle());
     }
     if (req.getDone() != null) {
