@@ -1,17 +1,17 @@
+# 基本的にアルファベット順で記載
+# datasourceのみ記載順は指定したものとする
 spring:
-  h2:
-    console:
-      enabled: true # H2コンソールを有効にする
-      path: /h2-console # コンソールにアクセスするためのURL
-
-  # JDBC接続設定（H2のメモリDBを使用）
-  datasource:
+  datasource: # JDBC接続設定（H2のメモリDBを使用）
     url: jdbc:h2:mem:testdb # jdbc:h2:~/testならファイルDB
     driver-class-name: org.h2.Driver # DBMSごとにドライバーが存在する
     username: kagome
     password:
 
-  # JPA起動時にテーブルを自動作成・更新
-  jpa:
+  h2:
+    console:
+      enabled: true # H2コンソールを有効にする
+      path: /h2-console # コンソールにアクセスするためのURL
+
+  jpa: # JPA起動時にテーブルを自動作成・更新
     hibernate:
       ddl-auto: update
