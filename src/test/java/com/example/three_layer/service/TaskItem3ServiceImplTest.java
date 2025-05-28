@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -164,8 +166,22 @@ public class TaskItem3ServiceImplTest {
   @Test
   void deleteById_タスクを削除できる() {
     Integer id = 1;
+
+    when(repo.findById(id)).thenReturn(Optional.of(new TaskItem3()));
+
     service.deleteById(id);
 
     verify(repo).deleteById(id);
+  }
+
+  @Test
+  void deleteById_存在しないIDのタスクなら例外を投げる() {
+    Integer id = 999;
+    when(repo.findById(id)).thenReturn(Optional.empty());
+
+    assertThrows(TaskItem3NotFoundException.class, () -> service.deleteById(id));
+
+    verify(repo).findById(id);
+    verify(repo, never()).deleteById(any()); // deleteById()が実行されていないことを確認
   }
 }
