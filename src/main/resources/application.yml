@@ -15,3 +15,13 @@ spring:
   jpa: # JPA起動時にテーブルを自動作成・更新
     hibernate:
       ddl-auto: update
+
+  # SpringSecurityのユーザ名とパスワード設定
+  security:
+    user:
+      name: user
+      password: pass
+
+  # プロファイル分離
+  profiles:
+    active: dev

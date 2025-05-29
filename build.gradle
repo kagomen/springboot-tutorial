@@ -44,6 +44,12 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0' // Lombokと一緒に使うために必要
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // JUnit Jupiter（JUnit 5）
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
 }
 
 // Spotless（フォーマッター）の設定
