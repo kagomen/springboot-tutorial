@@ -10,5 +10,5 @@ public class TaskItem3PatchRequest {
   @Size(max = 100, message = "100文字以内で入力してください")
   private String title;
 
-  private Boolean done; // Booleanにすることでnullを許容
+  private Boolean isDone; // Booleanにすることでnullを許容
 }

@@ -11,5 +11,5 @@ public class TaskItem3UpdateRequest {
   @Size(max = 100, message = "100文字以内で入力してください")
   private String title;
 
-  private boolean done;
+  private boolean isDone;
 }

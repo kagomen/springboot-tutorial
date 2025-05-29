@@ -60,8 +60,8 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
     if (!StringUtils.isBlank(req.getTitle())) { // 空文字、半角スペース、nullのときは変更しない
       taskItem.setTitle(req.getTitle());
     }
-    if (req.getDone() != null) {
-      taskItem.setDone(req.getDone());
+    if (req.getIsDone() != null) {
+      taskItem.setDone(req.getIsDone());
     }
 
     return repository.save(taskItem);

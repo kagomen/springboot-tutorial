@@ -20,5 +20,5 @@ public class TaskItem3 {
 
   private String title;
 
-  private boolean done;
+  private boolean isDone;
 }
