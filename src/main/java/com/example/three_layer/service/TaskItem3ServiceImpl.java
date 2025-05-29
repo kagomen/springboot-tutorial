@@ -71,6 +71,8 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
 
   @Override
   public void deleteById(Integer id) {
+    repository.findById(id).orElseThrow(() -> new TaskItem3NotFoundException());
+
     repository.deleteById(id);
   }
 }
