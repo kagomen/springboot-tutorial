@@ -1,18 +1,26 @@
 package com.example.three_layer.controller;
 
+import com.example.three_layer.common.ApiResponse;
+import com.example.three_layer.common.Meta;
+import com.example.three_layer.dto.TaskItem3PatchRequest;
 import com.example.three_layer.dto.TaskItem3Request;
 import com.example.three_layer.dto.TaskItem3Response;
-import com.example.three_layer.entity.TaskItem3;
+import com.example.three_layer.dto.TaskItem3UpdateRequest;
+import com.example.three_layer.mapper.TaskItem3Mapper;
 import com.example.three_layer.service.TaskItem3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,46 +32,51 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskItem3Controller {
 
   private final TaskItem3Service service;
+  private final TaskItem3Mapper mapper;
 
   @Autowired
-  public TaskItem3Controller(TaskItem3Service service) {
+  public TaskItem3Controller(TaskItem3Service service, TaskItem3Mapper mapper) {
     this.service = service;
+    this.mapper = mapper;
   }
 
-  @Operation(summary = "タスク一覧取得")
+  @Operation(summary = "ページ付きのタスク一覧取得", description = "ソート条件を ['title,asc'] のように指定しないとうまく実行できない")
   @GetMapping
-  public List<TaskItem3Response> getAll() {
-    List<TaskItem3> taskItems = service.findAll();
-    return taskItems.stream().map(taskItem -> this.toDTO(taskItem)).collect(Collectors.toList());
+  public ApiResponse<List<TaskItem3Response>> getAll(
+      @PageableDefault(size = 10) Pageable pageable) {
+    var page = service.findAll(pageable);
+    var data = page.getContent().stream().map(mapper::toDTO).toList();
+    return ApiResponse.ok(data, Meta.fromPage(page));
   }
 
   @Operation(summary = "タスク追加")
   @PostMapping
-  public TaskItem3Response addTaskItem(@RequestBody TaskItem3Request req) {
-    var taskItem = toEntity(req);
-    return toDTO(service.save(taskItem));
+  public ApiResponse<TaskItem3Response> addTaskItem(@RequestBody @Valid TaskItem3Request req) {
+    var result = mapper.toDTO(service.save(req));
+    return ApiResponse.ok(result);
+  }
+
+  @Operation(summary = "タスク更新")
+  @PutMapping("/{id}")
+  public ApiResponse<TaskItem3Response> updateTaskItem(
+      @PathVariable Integer id, @RequestBody @Valid TaskItem3UpdateRequest req) {
+    var result = mapper.toDTO(service.update(id, req));
+    return ApiResponse.ok(result);
+  }
+
+  @Operation(summary = "タスク部分更新")
+  @PatchMapping("/{id}")
+  public ApiResponse<TaskItem3Response> patchTaskItem(
+      @PathVariable Integer id, @RequestBody @Valid TaskItem3PatchRequest req) {
+    var result = mapper.toDTO(service.partialUpdate(id, req));
+    return ApiResponse.ok(result);
   }
 
   @Operation(summary = "タスク削除")
   @DeleteMapping("/{id}")
-  public void deleteTaskItem(@PathVariable Integer id) { // @PathVariable: URLに含まれる変数を引数として受け取る
+  public ApiResponse<Void> deleteTaskItem(
+      @PathVariable Integer id) { // @PathVariable: URLに含まれる変数を引数として受け取る
     service.deleteById(id);
-  }
-
-  // DTOからEntityに変換(対DB用)
-  private TaskItem3 toEntity(TaskItem3Request req) {
-    var entity = new TaskItem3();
-    entity.setTitle(req.getTitle());
-    entity.setDone(req.isDone());
-    return entity;
-  }
-
-  // EntityからDTOに変換（対クライアント用）
-  private TaskItem3Response toDTO(TaskItem3 entity) {
-    var dto = new TaskItem3Response();
-    dto.setId(entity.getId());
-    dto.setTitle(entity.getTitle());
-    dto.setDone(entity.isDone());
-    return dto;
+    return ApiResponse.ok(null);
   }
 }

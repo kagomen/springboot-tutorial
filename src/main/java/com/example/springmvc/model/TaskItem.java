@@ -17,5 +17,5 @@ public class TaskItem {
   private Integer id;
 
   private String title;
-  private boolean done;
+  private boolean isDone;
 }

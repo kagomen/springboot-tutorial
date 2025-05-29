@@ -8,5 +8,5 @@ import lombok.Data;
 public class TaskItem3Response {
   private Integer id;
   private String title;
-  private boolean done;
+  private boolean isDone;
 }
