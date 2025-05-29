@@ -42,7 +42,8 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
   }
 
   @Override
-  public TaskItem3 update(Integer id, TaskItem3UpdateRequest req) {
+  public TaskItem3 update(
+      Integer id, TaskItem3UpdateRequest req) { // idはURLパスで指定されて送られてくるものなので、req（リクエストボディ）とは区別する
     TaskItem3 taskItem =
         repository.findById(id).orElseThrow(() -> new TaskItem3NotFoundException());
 
@@ -53,7 +54,8 @@ public class TaskItem3ServiceImpl implements TaskItem3Service {
   }
 
   @Override
-  public TaskItem3 partialUpdate(Integer id, TaskItem3PatchRequest req) {
+  public TaskItem3 partialUpdate(
+      Integer id, TaskItem3PatchRequest req) { // idはURLパスで指定されて送られてくるものなので、req（リクエストボディ）とは区別する
     TaskItem3 taskItem =
         repository.findById(id).orElseThrow(() -> new TaskItem3NotFoundException());
 
