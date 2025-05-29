@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.example.test.type.Evaluation;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -46,13 +47,14 @@ public class CheckTest {
 
   @ParameterizedTest
   @CsvSource({
-    "80,80,excellent",
-    "79,80,very good",
-    "79,79,good",
+    "80,80,EXCELLENT",
+    "79,80,GREAT",
+    "79,79,GOOD",
   })
-  void testEvaluate(int math, int eng, String expected) {
+  void testEvaluate(int math, int eng, String expectedStr) {
+    var expected = Evaluation.valueOf(expectedStr);
     sut = new Check();
-    String actual = sut.evaluate(math, eng);
-    assertEquals(actual, expected);
+    var actual = sut.evaluate(math, eng);
+    assertEquals(expected, actual);
   }
 }

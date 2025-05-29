@@ -1,19 +1,22 @@
 package com.example.test;
 
-public class Check {
-  public boolean isAdult(int x) {
-    if (x >= 18) return true;
+import com.example.test.type.Evaluation;
 
-    return false;
+public class Check {
+  final int ADULT = 18;
+  final int HIGH_SCORE = 80;
+
+  public boolean isAdult(int x) {
+    return x >= ADULT;
   }
 
   public boolean isEmpty(String str) {
     return str.isEmpty();
   }
 
-  public String evaluate(int mathScore, int englishScore) {
-    if (mathScore >= 80 && englishScore >= 80) return "excellent";
-    if (mathScore >= 80 || englishScore >= 80) return "very good";
-    return "good";
+  public Evaluation evaluate(int mathScore, int englishScore) {
+    if (mathScore >= HIGH_SCORE && englishScore >= HIGH_SCORE) return Evaluation.EXCELLENT;
+    if (mathScore >= HIGH_SCORE || englishScore >= HIGH_SCORE) return Evaluation.GREAT;
+    return Evaluation.GOOD;
   }
 }
